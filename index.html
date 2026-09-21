@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>أذكار الصباح والمساء</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#cfeaec;--card:#fff;--ink:#12343b;--sub:#4a6f75;--accent:#1b7a86;--gold:#f6c945;--goldink:#3d2f00;--done:#d9efe0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e2226;--card:#173238;--ink:#e6f3f4;--sub:#8fb3b8;--accent:#4fb8c4;--gold:#e8b830;--goldink:#2a2000;--done:#1c3d33}}
+:root[data-theme="dark"]{--bg:#0e2226;--card:#173238;--ink:#e6f3f4;--sub:#8fb3b8;--accent:#4fb8c4;--gold:#e8b830;--goldink:#2a2000;--done:#1c3d33}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:2rem;font-weight:800;margin:8px 0 4px;color:var(--accent)}
+.tabs{display:flex;gap:8px;margin:12px 0}
+.tabs button{flex:1;padding:12px;border:2px solid var(--accent);background:transparent;color:var(--accent);font:800 1rem 'Cairo',sans-serif;border-radius:14px}
+.tabs button[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
+.bar{height:10px;background:var(--card);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .25s}
+.meta{display:flex;justify-content:space-between;align-items:center;margin:8px 0 16px;color:var(--sub);font-size:.9rem}
+.meta button{border:0;background:none;color:var(--accent);font:600 .9rem 'Cairo',sans-serif;text-decoration:underline}
+.card{display:block;width:100%;text-align:right;background:var(--card);color:var(--ink);border:0;border-radius:18px;padding:16px;margin:0 0 12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.card:active{transform:scale(.99)}
+.card:focus-visible{outline:3px solid var(--accent)}
+.card p{margin:0 0 12px;font:400 1.35rem/2.1 'Amiri',serif}
+.card .n{display:inline-flex;align-items:baseline;gap:6px;background:var(--gold);color:var(--goldink);border-radius:12px;padding:6px 16px;font-weight:800}
+.card .n b{font-size:1.4rem}
+.card.done{background:var(--done);opacity:.75}
+.card.done .n{background:var(--accent);color:var(--bg)}
+@media (prefers-reduced-motion:reduce){.bar i,.card{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1 id="ttl"></h1>
+<div class="tabs"><button id="bm" aria-pressed="true">الصباح</button><button id="be" aria-pressed="false">المساء</button></div>
+<div class="bar"><i id="pb"></i></div>
+<div class="meta"><span id="st"></span><button id="rs">ابدأ من جديد</button></div>
+<div id="list"></div>
+</main>
+<script>
+var D=[
+["آية الكرسي",1],
+["سورة الإخلاص",3],
+["سورة الفلق",3],
+["سورة الناس",3],
+["اللَّهُمَّ مَا [أَصْبَحَ|أَمْسَى] بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ",1],
+["[أَصْبَحْنَا|أَمْسَيْنَا] عَلَى فِطْرَةِ الْإِسْلَامِ، وَعَلَى كَلِمَةِ الْإِخْلَاصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ ﷺ، وَعَلَى مِلَّةِ أَبِينَا إِبْرَاهِيمَ حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ",1],
+["حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",7],
+["بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",3],
+["رَضِيتُ بِاللَّهِ رَبًّا وَبِالْإِسْلَامِ دِينًا وَبِمُحَمَّدٍ ﷺ نَبِيًّا",3],
+["سُبْحَانَ اللَّهِ وَبِحَمْدِهِ عَدَدَ خَلْقِهِ وَرِضَا نَفْسِهِ وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ",3],
+["[أَصْبَحْنَا وَأَصْبَحَ|أَمْسَيْنَا وَأَمْسَى] الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ. رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي [هَذَا الْيَوْمِ|هَذِهِ اللَّيْلَةِ] وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي [هَذَا الْيَوْمِ|هَذِهِ اللَّيْلَةِ] وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ",1],
+["اللَّهُمَّ بِكَ [أَصْبَحْنَا وَبِكَ أَمْسَيْنَا|أَمْسَيْنَا وَبِكَ أَصْبَحْنَا] وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ [النُّشُورُ|الْمَصِيرُ]",1],
+["اللَّهُمَّ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ",1],
+["اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ. اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ",3],
+["اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنَ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ وَقَهْرِ الرِّجَالِ",3],
+["اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",1],
+["اللَّهُمَّ إِنِّي [أَصْبَحْتُ|أَمْسَيْتُ] أُشْهِدُكَ، وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ، وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ",4],
+["[أَصْبَحْنَا وَأَصْبَحَ|أَمْسَيْنَا وَأَمْسَى] الْمُلْكُ لِلَّهِ رَبِّ الْعَالَمِينَ، اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ [هَذَا الْيَوْمِ|هَذِهِ اللَّيْلَةِ]: فَتْحَهُ، وَنَصْرَهُ، وَنُورَهُ، وَبَرَكَتَهُ، وَهُدَاهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِيهِ وَشَرِّ مَا بَعْدَهُ",1],
+["لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",100],
+["سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ",100],
+["اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ",10]
+];
+var mode='m',left={m:D.map(function(d){return d[1]}),e:D.map(function(d){return d[1]})};
+function tx(s){return s.replace(/\[(.*?)\|(.*?)\]/g,function(_,a,b){return mode==='m'?a:b})}
+function draw(){
+  var L=left[mode],box=document.getElementById('list'),done=0;
+  document.getElementById('ttl').textContent=mode==='m'?'أذكار الصباح':'أذكار المساء';
+  box.innerHTML='';
+  D.forEach(function(d,i){
+    var b=document.createElement('button');
+    b.className='card'+(L[i]===0?' done':'');
+    b.innerHTML='<p></p><span class="n"><b>'+(L[i]===0?'✓':L[i])+'</b><span>'+(L[i]===0?'تم':(d[1]===1?'مرة':'متبقي'))+'</span></span>';
+    b.firstChild.textContent=tx(d[0]);
+    b.onclick=function(){if(L[i]>0){L[i]--;if(navigator.vibrate)navigator.vibrate(L[i]===0?60:15);draw()}};
+    box.appendChild(b);
+    if(L[i]===0)done++;
+  });
+  document.getElementById('pb').style.width=(done/D.length*100)+'%';
+  document.getElementById('st').textContent='تم '+done+' من '+D.length;
+}
+function setMode(m){mode=m;document.getElementById('bm').setAttribute('aria-pressed',m==='m');document.getElementById('be').setAttribute('aria-pressed',m==='e');draw()}
+document.getElementById('bm').onclick=function(){setMode('m')};
+document.getElementById('be').onclick=function(){setMode('e')};
+document.getElementById('rs').onclick=function(){left[mode]=D.map(function(d){return d[1]});draw()};
+draw();
+</script>
+</body>
+</html>
