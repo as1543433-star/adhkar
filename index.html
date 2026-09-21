@@ -86,7 +86,7 @@ function setMode(m){mode=m;document.getElementById('bm').setAttribute('aria-pres
 document.getElementById('bm').onclick=function(){setMode('m')};
 document.getElementById('be').onclick=function(){setMode('e')};
 document.getElementById('rs').onclick=function(){left[mode]=D.map(function(d){return d[1]});draw()};
-draw();
+setMode(new Date().getHours() >= 14 ? 'e' : 'm');
 </script>
 </body>
 </html>
