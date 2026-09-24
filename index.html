@@ -67,24 +67,42 @@ h1{margin:0;font-size:1.7rem;font-weight:800;color:var(--gold)}
 .sm{font:600 .95rem Cairo,sans-serif;border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:10px 16px;border-radius:14px;cursor:pointer}
 .row2 span{color:var(--mute);font-weight:600}
 
-/* Quran section */
-.qsearch{width:100%;font:600 1rem Cairo,sans-serif;background:var(--card);border:1.5px solid var(--line);color:var(--ink);border-radius:14px;padding:12px 16px;margin-bottom:12px}
-.qsearch::placeholder{color:var(--mute)}
-.qlist{display:grid;gap:10px;max-height:70vh;overflow-y:auto}
-.qitem{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;width:100%;text-align:right;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:12px 16px;color:var(--ink);cursor:pointer;font-family:inherit}
-.qitem:active{transform:scale(.985)}
-.qnum{width:38px;height:38px;border-radius:50%;border:2px solid var(--acc);color:var(--acc);display:grid;place-items:center;font:700 .9rem Cairo,sans-serif;flex:none}
-.qname{font-family:Amiri,serif;font-size:1.15rem;font-weight:700}
-.qmeta{font-size:.78rem;color:var(--mute);margin-top:2px}
-.qarrow{color:var(--mute);font-size:1.2rem}
-.qback{background:none;border:0;color:var(--acc);font:700 1rem Cairo,sans-serif;cursor:pointer;padding:6px 0;margin-bottom:8px}
+/* ===== Quran section ===== */
+.qtop{display:flex;gap:8px;align-items:center;margin-bottom:14px}
+.qmenubtn{width:46px;height:46px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--gold);font-size:1.25rem;cursor:pointer;flex:none;display:grid;place-items:center}
+.qgsearch{flex:1;min-width:0;font:600 .95rem Cairo,sans-serif;background:var(--card);border:1.5px solid var(--line);color:var(--ink);border-radius:14px;padding:12px 14px}
+.qgsearch::placeholder{color:var(--mute)}
+
+.qresults{display:grid;gap:10px}
+.qresult{display:block;width:100%;text-align:right;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;color:var(--ink);cursor:pointer;font-family:inherit}
+.qresult:active{transform:scale(.985)}
+.qrtxt{font-family:'Amiri Quran',Amiri,serif;font-size:1.15rem;line-height:2;margin-bottom:6px}
+.qrmeta{font-size:.8rem;color:var(--acc);font-weight:700}
+
 .qsname{text-align:center;color:var(--gold);font-size:1.6rem;margin:4px 0 2px}
-.qsinfo{text-align:center;color:var(--mute);font-size:.85rem;margin-bottom:14px}
-.qbasmala{text-align:center;font-family:'Amiri Quran',Amiri,serif;font-size:1.7rem;color:var(--gold);margin:6px 0 18px}
-.qtext{font-family:'Amiri Quran',Amiri,serif;font-size:1.45rem;line-height:2.6;text-align:justify;background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:20px}
+.qsinfo{text-align:center;color:var(--mute);font-size:.85rem;margin-bottom:12px}
+.qbasmala{text-align:center;font-family:'Amiri Quran',Amiri,serif;font-size:1.7rem;color:var(--gold);margin:0 0 16px;min-height:1.2em}
+.qtext{font-family:'Amiri Quran',Amiri,serif;font-size:1.45rem;line-height:2.7;text-align:justify;background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:20px;max-height:62vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.qayahwrap{transition:background .5s;border-radius:8px}
+.qayahwrap.hl{background:rgba(236,187,53,.28)}
 .qayah{display:inline-block;width:1.9em;height:1.9em;line-height:1.9em;text-align:center;border:1.5px solid var(--gold);border-radius:50%;color:var(--gold);font-family:Cairo,sans-serif;font-size:.72rem;font-weight:700;margin:0 2px;vertical-align:middle}
 .qstate{text-align:center;color:var(--mute);padding:30px 10px}
 .qretry{margin-top:10px;background:var(--acc);color:var(--acc-ink);border:0;font:700 .95rem Cairo,sans-serif;padding:10px 20px;border-radius:12px;cursor:pointer}
+
+.qoverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40}
+.qdrawer{position:fixed;top:0;bottom:0;right:0;width:min(82vw,320px);background:var(--bg);border-left:1.5px solid var(--line);z-index:50;display:flex;flex-direction:column;padding:16px;padding-top:calc(16px + env(safe-area-inset-top,0px));padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.qdrawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex:none}
+.qdrawer-head b{color:var(--gold);font-size:1.1rem}
+.qclose{background:none;border:0;color:var(--mute);font-size:1.4rem;cursor:pointer;padding:4px;line-height:1}
+.qsearchname{width:100%;font:600 .95rem Cairo,sans-serif;background:var(--card);border:1.5px solid var(--line);color:var(--ink);border-radius:14px;padding:11px 14px;margin-bottom:10px;flex:none}
+.qsearchname::placeholder{color:var(--mute)}
+.qlist{display:grid;gap:8px;overflow-y:auto;flex:1}
+.qitem{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;width:100%;text-align:right;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;color:var(--ink);cursor:pointer;font-family:inherit}
+.qitem.on{border-color:var(--gold)}
+.qnum{width:34px;height:34px;border-radius:50%;border:2px solid var(--acc);color:var(--acc);display:grid;place-items:center;font:700 .82rem Cairo,sans-serif;flex:none}
+.qname{font-family:Amiri,serif;font-size:1.05rem;font-weight:700}
+.qimeta{font-size:.74rem;color:var(--mute);margin-top:1px}
+.qarrow{color:var(--mute);font-size:1.1rem}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -121,17 +139,26 @@ h1{margin:0;font-size:1.7rem;font-weight:800;color:var(--gold)}
   </section>
 
   <section id="qsec" hidden>
-    <div id="qlistview">
-      <input type="search" class="qsearch" id="qsearch" placeholder="ابحث عن اسم السورة…">
-      <div class="qlist" id="qlist"><div class="qstate">جارِ تحميل الفهرس…</div></div>
+    <div class="qtop">
+      <button class="qmenubtn" id="qmenubtn" aria-label="فهرس السور">☰</button>
+      <input type="search" class="qgsearch" id="qgsearch" placeholder="ابحث في كل القرآن…">
     </div>
-    <div id="qreadview" hidden>
-      <button class="qback" id="qback">‹ رجوع للفهرس</button>
+
+    <div class="qresults" id="qresults" hidden></div>
+
+    <div id="qreader">
       <div class="qsname" id="qsname"></div>
       <div class="qsinfo" id="qsinfo"></div>
       <div class="qbasmala" id="qbasmala"></div>
-      <div class="qtext" id="qtext"><div class="qstate">جارِ تحميل السورة…</div></div>
+      <div class="qtext" id="qtext"><div class="qstate">جارِ التحميل…</div></div>
     </div>
+
+    <div class="qoverlay" id="qoverlay" hidden></div>
+    <aside class="qdrawer" id="qdrawer" hidden>
+      <div class="qdrawer-head"><b>فهرس السور</b><button class="qclose" id="qclose" aria-label="إغلاق">✕</button></div>
+      <input type="search" class="qsearchname" id="qsearchname" placeholder="ابحث عن اسم السورة…">
+      <div class="qlist" id="qlist"><div class="qstate">جارِ تحميل الفهرس…</div></div>
+    </aside>
   </section>
 
   <p class="fin" id="fin" aria-live="polite"></p>
@@ -200,9 +227,10 @@ function show(){
  $("qsec").hidden=!isQ;
  $("ttl").textContent={m:"أذكار الصباح",e:"أذكار المساء",s:"السبحة",q:"القرآن الكريم"}[tab];
  $("fin").textContent="";
+ if(!isQ)qCloseDrawer();
  if(isList)render();
  else if(isS)tsRender();
- else if(isQ)qShowList();
+ else if(isQ)qEnter();
 }
 var PH=["سبحان الله","الحمد لله","الله أكبر","لا إله إلا الله","أستغفر الله","اللهم صلِّ على محمد"];
 var TS={p:0,t:33,n:PH.map(function(){return 0})};
@@ -236,61 +264,151 @@ var st=get("adhkar-theme");root.setAttribute("data-theme",(st==="light")?"light"
 
 /* ===== Quran section ===== */
 var Q_API="https://api.alquran.cloud/v1/";
-var surahs=null,qFiltered=null;
+var surahs=null,qCurrentSurah=null,qScrollTimer=null,qSearchTimer=null;
+var Q_LAST="adhkar-qlast",Q_SCROLL="adhkar-qscroll-";
 function arNum(n){var m=["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];return String(n).split("").map(function(c){return /[0-9]/.test(c)?m[+c]:c}).join("")}
 function revAr(t){return t==="Meccan"?"مكية":"مدنية"}
-function qShowList(){
- $("qreadview").hidden=true;$("qlistview").hidden=false;
- if(surahs){qRenderList(surahs);return}
+
+function stripTashkeel(s){return s.replace(/[\u0610-\u061A\u064B-\u065F\u06D6-\u06DC\u06DF-\u06E8\u06EA-\u06ED\u08D4-\u08E1\u08E3-\u08FF]/g,"")}
+function normAlef(s){return s.replace(/[إأآٱ]/g,"ا")}
+function skelChar(ch){var c=normAlef(stripTashkeel(ch));return c}
+var BASMALA_SKEL=normAlef(stripTashkeel("بسم الله الرحمن الرحيم")).replace(/\s+/g,"");
+var BASMALA_STATIC="بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ";
+function findBasmalaCut(text){
+ var skel="",cut=0;
+ for(var i=0;i<text.length;i++){
+  var c=skelChar(text[i]);
+  if(c&&!/\s/.test(c))skel+=c;
+  cut=i+1;
+  if(skel===BASMALA_SKEL)break;
+  if(skel.length>BASMALA_SKEL.length)return -1;
+ }
+ if(skel!==BASMALA_SKEL)return -1;
+ while(cut<text.length&&/\s/.test(text[cut]))cut++;
+ return cut;
+}
+
+/* drawer */
+function qOpenDrawer(){ if(!surahs)qLoadSurahList(); $("qdrawer").hidden=false;$("qoverlay").hidden=false }
+function qCloseDrawer(){ $("qdrawer").hidden=true;$("qoverlay").hidden=true }
+$("qmenubtn").onclick=qOpenDrawer;
+$("qclose").onclick=qCloseDrawer;
+$("qoverlay").onclick=qCloseDrawer;
+
+function qLoadSurahList(){
  var cached=get("adhkar-surahs");
- if(cached){try{surahs=JSON.parse(cached);qRenderList(surahs)}catch(e){}}
+ if(cached){try{surahs=JSON.parse(cached);qRenderDrawerList(surahs)}catch(e){}}
  fetch(Q_API+"surah").then(function(r){return r.json()}).then(function(res){
-  surahs=res.data;put("adhkar-surahs",JSON.stringify(surahs));qRenderList(surahs);
+  surahs=res.data;put("adhkar-surahs",JSON.stringify(surahs));qRenderDrawerList(surahs);
  }).catch(function(){
-  if(!surahs)$("qlist").innerHTML='<div class="qstate">تعذّر تحميل الفهرس، تأكد من الاتصال بالإنترنت<br><button class="qretry" id="qretry">إعادة المحاولة</button></div>';
-  var rb=$("qretry");if(rb)rb.onclick=qShowList;
+  if(!surahs)$("qlist").innerHTML='<div class="qstate">تعذّر تحميل الفهرس<br><button class="qretry" id="qretryL">إعادة المحاولة</button></div>';
+  var rb=$("qretryL");if(rb)rb.onclick=qLoadSurahList;
  });
 }
-function qRenderList(list){
+function qRenderDrawerList(list){
  var L=$("qlist");L.innerHTML="";
  list.forEach(function(s){
   var b=document.createElement("button");
-  b.className="qitem";
-  b.innerHTML='<span class="qarrow">‹</span><span><span class="qname">'+s.name+'</span><div class="qmeta">'+s.numberOfAyahs+' آية · '+revAr(s.revelationType)+'</div></span><span class="qnum">'+arNum(s.number)+'</span>';
-  b.onclick=function(){qOpenSurah(s)};
+  b.className="qitem"+(s.number===qCurrentSurah?" on":"");
+  b.innerHTML='<span class="qarrow">‹</span><span><span class="qname">'+s.name+'</span><div class="qimeta">'+s.numberOfAyahs+' آية · '+revAr(s.revelationType)+'</div></span><span class="qnum">'+arNum(s.number)+'</span>';
+  b.onclick=function(){qCloseDrawer();qOpenSurah(s.number,{})};
   L.appendChild(b);
  });
  if(!list.length)L.innerHTML='<div class="qstate">لا توجد نتائج</div>';
 }
-$("qsearch").addEventListener("input",function(){
+$("qsearchname").addEventListener("input",function(){
  if(!surahs)return;
  var q=this.value.trim();
- if(!q){qRenderList(surahs);return}
- qRenderList(surahs.filter(function(s){return s.name.indexOf(q)>-1||s.englishName.toLowerCase().indexOf(q.toLowerCase())>-1}));
+ qRenderDrawerList(q?surahs.filter(function(s){return s.name.indexOf(q)>-1||s.englishName.toLowerCase().indexOf(q.toLowerCase())>-1}):surahs);
 });
-$("qback").onclick=function(){$("qreadview").hidden=true;$("qlistview").hidden=false};
-function qOpenSurah(s){
- $("qlistview").hidden=true;$("qreadview").hidden=false;
- $("qsname").textContent=s.name;
- $("qsinfo").textContent=s.numberOfAyahs+" آية · "+revAr(s.revelationType);
- $("qbasmala").textContent=(s.number===1||s.number===9)?"":"بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ";
- $("qtext").innerHTML='<div class="qstate">جارِ تحميل السورة…</div>';
- var cached=get("adhkar-surah-"+s.number);
- if(cached){try{qRenderSurah(JSON.parse(cached));return}catch(e){}}
- fetch(Q_API+"surah/"+s.number+"/quran-uthmani").then(function(r){return r.json()}).then(function(res){
-  put("adhkar-surah-"+s.number,JSON.stringify(res.data));
-  qRenderSurah(res.data);
- }).catch(function(){
-  $("qtext").innerHTML='<div class="qstate">تعذّر تحميل السورة، تأكد من الاتصال بالإنترنت<br><button class="qretry" id="qretry2">إعادة المحاولة</button></div>';
-  var rb=$("qretry2");if(rb)rb.onclick=function(){qOpenSurah(s)};
- });
+
+/* reader */
+function qEnter(){
+ if(!surahs)qLoadSurahList();
+ var last=null;try{last=JSON.parse(get(Q_LAST))}catch(e){}
+ qOpenSurah(last&&last.surah?last.surah:1,{});
 }
 function qRenderSurah(data){
- var html=data.ayahs.map(function(a){
-  return a.text+' <span class="qayah">'+arNum(a.numberInSurah)+'</span>';
- }).join(" ");
+ var ayahs=data.ayahs.slice();
+ var basmalaLine="";
+ if(data.number===9){/* لا بسملة في التوبة */}
+ else if(data.number===1){/* البسملة هي الآية الأولى نفسها */}
+ else if(ayahs.length){
+  var cut=findBasmalaCut(ayahs[0].text);
+  if(cut>0){basmalaLine=ayahs[0].text.slice(0,cut).trim();ayahs[0]={numberInSurah:ayahs[0].numberInSurah,text:ayahs[0].text.slice(cut)};}
+  else basmalaLine=BASMALA_STATIC;
+ }
+ $("qbasmala").textContent=basmalaLine;
+ var html=ayahs.map(function(a){
+  return '<span class="qayahwrap" id="ay-'+a.numberInSurah+'">'+a.text+' <span class="qayah">'+arNum(a.numberInSurah)+'</span></span> ';
+ }).join("");
  $("qtext").innerHTML=html;
 }
+function qOpenSurah(n,opts){
+ qCurrentSurah=n;
+ put(Q_LAST,JSON.stringify({surah:n}));
+ $("qsname").textContent="";$("qsinfo").textContent="";$("qbasmala").textContent="";
+ $("qtext").innerHTML='<div class="qstate">جارِ تحميل السورة…</div>';
+ function done(data){
+  $("qsname").textContent=data.name;
+  $("qsinfo").textContent=data.numberOfAyahs+" آية · "+revAr(data.revelationType);
+  qRenderSurah(data);
+  requestAnimationFrame(function(){
+   if(opts.ayah){
+    var el=document.getElementById("ay-"+opts.ayah);
+    if(el){el.scrollIntoView({block:"center"});el.classList.add("hl");setTimeout(function(){el.classList.remove("hl")},2200)}
+   }else{
+    var sc=get(Q_SCROLL+n);
+    $("qtext").scrollTop=sc?parseInt(sc,10):0;
+   }
+  });
+ }
+ var cached=get("adhkar-surah-"+n);
+ if(cached){try{done(JSON.parse(cached));return}catch(e){}}
+ fetch(Q_API+"surah/"+n+"/quran-uthmani").then(function(r){return r.json()}).then(function(res){
+  put("adhkar-surah-"+n,JSON.stringify(res.data));done(res.data);
+ }).catch(function(){
+  $("qtext").innerHTML='<div class="qstate">تعذّر تحميل السورة، تأكد من الاتصال بالإنترنت<br><button class="qretry" id="qretryS">إعادة المحاولة</button></div>';
+  var rb=$("qretryS");if(rb)rb.onclick=function(){qOpenSurah(n,opts)};
+ });
+}
+$("qtext").addEventListener("scroll",function(){
+ clearTimeout(qScrollTimer);
+ var v=$("qtext").scrollTop;
+ qScrollTimer=setTimeout(function(){if(qCurrentSurah)put(Q_SCROLL+qCurrentSurah,String(v))},400);
+});
+
+/* full-text search across the whole Quran */
+function qDoSearch(q){
+ $("qresults").hidden=false;$("qreader").hidden=true;
+ $("qresults").innerHTML='<div class="qstate">جارِ البحث…</div>';
+ fetch(Q_API+"search/"+encodeURIComponent(q)+"/all/quran-simple").then(function(r){return r.json()}).then(function(res){
+  if(!res.data||!res.data.matches||!res.data.matches.length){$("qresults").innerHTML='<div class="qstate">لا توجد نتائج لـ «'+q+'»</div>';return}
+  qRenderResults(res.data.matches);
+ }).catch(function(){$("qresults").innerHTML='<div class="qstate">تعذّر البحث، تأكد من الاتصال بالإنترنت</div>'});
+}
+function qRenderResults(matches){
+ var L=$("qresults");L.innerHTML="";
+ matches.slice(0,50).forEach(function(m){
+  var b=document.createElement("button");
+  b.className="qresult";
+  b.innerHTML='<div class="qrtxt">'+m.text+'</div><div class="qrmeta">'+m.surah.name+' · آية '+arNum(m.numberInSurah)+'</div>';
+  b.onclick=function(){
+   $("qgsearch").value="";$("qresults").hidden=true;$("qreader").hidden=false;
+   qOpenSurah(m.surah.number,{ayah:m.numberInSurah});
+  };
+  L.appendChild(b);
+ });
+}
+$("qgsearch").addEventListener("input",function(){
+ var v=this.value.trim();
+ clearTimeout(qSearchTimer);
+ if(!v){$("qresults").hidden=true;$("qreader").hidden=false;return}
+ qSearchTimer=setTimeout(function(){qDoSearch(v)},600);
+});
+$("qgsearch").addEventListener("keydown",function(e){
+ if(e.key==="Enter"){clearTimeout(qSearchTimer);var v=this.value.trim();if(v)qDoSearch(v)}
+});
 
 load();setTab(new Date().getHours()>=14?"e":"m");
 </script>
